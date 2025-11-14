@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { GenreModule } from './genre/genre.module';
-import { MovieModule } from './movie/movie.module';
+import { GenreModule } from './modules/genre/genre.module';
+import { MovieModule } from './modules/movie/movie.module';
 
 @Module({
   imports: [GenreModule, MovieModule],
@@ -10,3 +10,5 @@ import { MovieModule } from './movie/movie.module';
   providers: [AppService],
 })
 export class AppModule {}
+
+

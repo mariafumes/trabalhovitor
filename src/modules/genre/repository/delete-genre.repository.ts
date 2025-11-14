@@ -1,15 +1,15 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable prettier/prettier */
 import { Injectable } from "@nestjs/common";
-import { PrismaService } from "../../../shared/databases/prisma.database";
+import { PrismaService } from "src/shared/databases/prisma.database";
+
+
 
 @Injectable()
-export class DeleteScenarioRepository {
+export class DeleteGenreRepository {
     constructor(private readonly prisma: PrismaService) { }
-
-    async delete(id:string) {
-        const scenario = await this.prisma.scenario.delete({ where: { id } });
-        return scenario;
+    async Delete(id: string) {
+        const Genre = await this.prisma.genre.delete({ where: { id } });
+        return Genre;
     }
+
 }

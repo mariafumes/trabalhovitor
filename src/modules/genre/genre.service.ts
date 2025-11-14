@@ -1,26 +1,37 @@
+/* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { CreateGenreDto } from './dto/create-genre.dto';
+import { CreateGenreUseCase } from './use-cases/create-genre.use-case';
+import { DeleteGenreUseCase, FindOneGenreUseCase, ListGenreUseCase } from './use-cases';
+import { UpdateGenreUseCase } from './use-cases/update-genre.use-case';
 import { UpdateGenreDto } from './dto/update-genre.dto';
 
 @Injectable()
 export class GenreService {
-  create(createGenreDto: CreateGenreDto) {
-    return 'This action adds a new genre';
+  constructor(private readonly createGenreUseCase: CreateGenreUseCase, 
+    private readonly listGenreUseCase: ListGenreUseCase,
+    private readonly findoneGenreUseCase: FindOneGenreUseCase,
+    private readonly deleteGenreUseCase: DeleteGenreUseCase,
+    private readonly updateGenreUseCase: UpdateGenreUseCase) {}
+
+  create(data: CreateGenreDto) {
+    return this.createGenreUseCase.execute(data);
   }
 
   findAll() {
-    return `This action returns all genre`;
+   return this.listGenreUseCase.execute();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} genre`;
+
+  findOne(id: string) {
+    return this.findoneGenreUseCase.execute(id);
   }
 
-  update(id: number, updateGenreDto: UpdateGenreDto) {
-    return `This action updates a #${id} genre`;
+  update(id: string , data:UpdateGenreDto) {
+    return this.updateGenreUseCase.execute(id, data);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} genre`;
+  remove(id:string) {
+    return this.deleteGenreUseCase.execute(id);
   }
 }

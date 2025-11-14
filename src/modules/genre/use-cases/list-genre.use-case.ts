@@ -1,22 +1,18 @@
 /* eslint-disable prettier/prettier */
-import { Injectable, Logger } from '@nestjs/common';
-import { ListGenreRepository } from '../repository/list-genre-repository';
+import { Injectable, Logger } from "@nestjs/common";
+import { ListGenreRepository } from "../repository/list-genre.repository";
 
 @Injectable()
 export class ListGenreUseCase {
-    constructor(
-        private readonly listGenreRepository: ListGenreRepository,
-        private readonly logger: Logger,
-    ) {}
-
-    async list(){
-        try {
-            const genre = this.listGenreRepository.list();
-            this.logger.log("Genre listed successfully");
-            return genre;
-        } catch (error) {
-            this.logger.error(error);
-            throw error;
-        }
+  constructor(private readonly listGenreRepository: ListGenreRepository,
+    private readonly logger: Logger) { }
+  async execute() {
+    try {
+      const Genre = await this.listGenreRepository.list();
+      return Genre;
+    } catch (error) {
+      this.logger.error('Error creating Genre', error);
+      throw error;
     }
+  }
 }
